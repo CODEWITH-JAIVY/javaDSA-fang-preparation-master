@@ -32,10 +32,38 @@ public class MinHeapImplementation {
         public  int getmin ( ) {
             return minheap[0] ;
         }
+
+
+
+        // delete from the min Heap
+         public void delete() {
+            int min  = minheap[0] ;
+            minheap[0]= minheap[size -1] ;
+            size -- ;
+            int i  = 0 ;
+
+            while (true) {
+                int minIndex  = i ;
+                int left = 2 * i +1  ;
+                int right = 2 * i +2  ;
+
+                if( left < size && minheap[left]  <  minheap[minIndex]) minIndex = left  ;
+                if( right < size && minheap[right] <  minheap[minIndex])minIndex = right ;
+
+                if( minIndex != i  ) {
+                    swap(minIndex , i );
+                    i  = minIndex ;
+                }else {
+                    break;
+                }
+            }
+
+         }
+
     }
 
     public static void main(String[] args) {
-        heap heapobject  = new heap(4) ;
+        heap heapobject  = new heap(10) ;
         heapobject.insert(10);
         heapobject.insert(30);
         heapobject.insert(5);
@@ -44,5 +72,11 @@ public class MinHeapImplementation {
         int key  = heapobject.getmin();
         System.out.println(key);
 //        heapobject.insert(100);
+        heapobject.delete();
+
+        int min = heapobject.getmin() ;
+        System.out.println(" min element is "+min);
+
+
     }
 }
